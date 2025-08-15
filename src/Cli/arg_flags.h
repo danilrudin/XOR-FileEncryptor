@@ -1,5 +1,5 @@
-#ifndef ARGFLAGS_H
-#define ARGFLAGS_H
+#ifndef ARG_FLAGS_H
+#define ARG_FLAGS_H
 
 #define FLAG_ENCRYPT "-e"
 #define FLAG_DECRYPT "-d"
@@ -8,4 +8,4 @@
 #define FLAG_INPUT "-i"
 #define FLAG_OUTPUT "-o"
 
-#endif // ARGFLAGS_H
+#endif // ARG_FLAGS_H

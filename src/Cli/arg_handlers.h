@@ -1,0 +1,15 @@
+#ifndef ARG_HANDLERS_H
+#define ARG_HANDLERS_H
+
+#include "args.h"
+
+typedef int (*ArgHandler)(int argc, char *argv[], int *i, cli_args_t *opts);
+
+int handle_encrypt(int argc, char *argv[], int *i, cli_args_t *opts);
+int handle_decrypt(int argc, char *argv[], int *i, cli_args_t *opts);
+int handle_key(int argc, char *argv[], int *i, cli_args_t *opts);
+int handle_key(int argc, char *argv[], int *i, cli_args_t *opts);
+int handle_input(int argc, char *argv[], int *i, cli_args_t *opts);
+int handle_output(int argc, char *argv[], int *i, cli_args_t *opts);
+
+#endif // ARG_HANDLERS_H
