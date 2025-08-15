@@ -8,37 +8,57 @@ on:
 
 jobs:
   build-windows:
-    name: Build (Windows)
     runs-on: windows-latest
-    env:
-      BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory # Directory where build-wrapper output will be placed
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Run Build Wrapper
+          fetch-depth: 0
+
+      - name: Setup MSYS2 + MinGW64
+        uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: >
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-make
+            mingw-w64-x86_64-cmake
+
+      - name: Configure
+        shell: msys2 {0}
         run: |
-          cmake -G "MinGW Makefiles" -B build -S .
-          build-wrapper-win-x86-64.exe --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build --config Release
-      - name: Upload Artifact
+          cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -B build -S .
+
+      - name: Build
+        shell: msys2 {0}
+        run: |
+          cmake --build build
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: FileEncryptor-Win-x86-64
           path: build/bin
 
   build-linux:
-    name: Build (Linux)
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Dependencies
-        run: sudo apt-get update && sudo apt-get install -y build-essential cmake
-      - name: Configure and Build
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
         run: |
-          cmake -B build -S .
-          cmake --build build --config Release
-      - name: Upload Artifact (Linux)
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake
+
+      - name: Configure CMake
+        run: cmake -B build -S .
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FileEncryptor-Linux-x86-64 #By default, ubuntu-latest builds for the x86-64 architecture.
+          name: FileEncryptor-Linux-x86-64
           path: build/bin
