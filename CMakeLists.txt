@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.31.6 FATAL_ERROR)
 
-project(XOR-FileEncryptor)
+project(XOR-FileEncryptor C)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED TRUE)
