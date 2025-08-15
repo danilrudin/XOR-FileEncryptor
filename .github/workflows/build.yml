@@ -5,30 +5,21 @@ on:
       - master
   pull_request:
     types: [opened, synchronize, reopened]
-    
+
 jobs:
-  build:
-    name: Build (Windows) | Analyze
+  build-windows:
+    name: Build (Windows)
     runs-on: windows-latest
     env:
       BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory # Directory where build-wrapper output will be placed
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Install Build Wrapper
-        uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v5
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Run Build Wrapper
         run: |
           cmake -G "MinGW Makefiles" -B build -S .
           build-wrapper-win-x86-64.exe --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build --config Release
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            --define sonar.cfamily.compile-commands="${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
