@@ -22,7 +22,7 @@ set(SOURCES
 	src/Cli/argHandlers.c
 )
 
-add_executable(FileEncryptor
+add_executable(xor-file-encryptor
 	${HEADERS}
 	${SOURCES}
 )

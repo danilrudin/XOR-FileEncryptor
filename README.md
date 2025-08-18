@@ -13,7 +13,7 @@ A simple file encryption utility based on the XOR algorithm.
 The program is run from the CLI.
 
 ```bash
-FileEncryptor.exe [-e | -d] [-k <key> | -g] -i <input_file> -o <output_file>
+xor-file-encryptor.exe [-e | -d] [-k <key> | -g] -i <input_file> -o <output_file>
 ```
 
 ### Options
@@ -29,10 +29,10 @@ Examples:
 
 ```bash
 # Encrypt file.txt to file.enc with key "secret"
-FileEncryptor.exe -e -k secret -i file.txt -o file.enc
+xor-file-encryptor.exe -e -k secret -i file.txt -o file.enc
 
 # Decrypt file.enc back to file.txt with key "secret"
-FileEncryptor.exe -d -k secret -i file.enc -o file.txt
+xor-file-encryptor.exe -d -k secret -i file.enc -o file.txt
 ```
 
 ---

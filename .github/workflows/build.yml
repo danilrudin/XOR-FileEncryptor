@@ -36,11 +36,11 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FileEncryptor-Win-x86-64
+          name: XORFileEncryptor-Win-x86-64
           path: build/bin
 
   build-linux:
-    runs-on: ubuntu-latestgiy
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -60,5 +60,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FileEncryptor-Linux-x86-64
+          name: XORFileEncryptor-Linux-x86-64
           path: build/bin
