@@ -1,5 +1,5 @@
-#include "Encryptors/xorencryptor.h"
-#include "Cli/args.h"
+#include "encryptors/xorencryptor.h"
+#include "cli/args.h"
 #include "constants.h"
 #include <stdio.h>
 #include <stdlib.h>
