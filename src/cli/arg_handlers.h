@@ -1,5 +1,5 @@
-#ifndef ARGHANDLERS_H
-#define ARGHANDLERS_H
+#ifndef ARG_HANDLERS_H
+#define ARG_HANDLERS_H
 
 #include "args.h"
 
@@ -12,4 +12,4 @@ int handle_key(int argc, char *argv[], int *i, cli_args_t *opts);
 int handle_input(int argc, char *argv[], int *i, cli_args_t *opts);
 int handle_output(int argc, char *argv[], int *i, cli_args_t *opts);
 
-#endif // ARGHANDLERS_H
+#endif // ARG_HANDLERS_H

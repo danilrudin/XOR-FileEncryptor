@@ -9,17 +9,17 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/bin)
 
 set(HEADERS
     src/constants.h
-    src/encryptors/xorencryptor.h
+    src/encryptors/xor_encryptor.h
     src/cli/args.h
-    src/cli/argHandlers.h
-    src/cli/argFlags.h
+    src/cli/arg_handlers.h
+    src/cli/arg_flags.h
 )
 
 set(SOURCES
     src/main.c
-    src/encryptors/xorencryptor.c
+    src/encryptors/xor_encryptor.c
     src/cli/args.c
-    src/cli/argHandlers.c
+    src/cli/arg_handlers.c
 )
 
 add_executable(xor-file-encryptor

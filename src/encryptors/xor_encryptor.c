@@ -1,4 +1,4 @@
-#include "xorencryptor.h"
+#include "xor_encryptor.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

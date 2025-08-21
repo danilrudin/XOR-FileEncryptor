@@ -1,5 +1,5 @@
-#include "argFlags.h"
-#include "argHandlers.h"
+#include "arg_flags.h"
+#include "arg_handlers.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -1,6 +1,6 @@
 #include "args.h"
-#include "argFlags.h"
-#include "argHandlers.h"
+#include "arg_flags.h"
+#include "arg_handlers.h"
 #include "../constants.h"
 #include <stdio.h>
 #include <stdlib.h>
