@@ -7,21 +7,21 @@
 
 int main(int argc, char *argv[])
 {
-    CliArgs opts;
-    if (parseArgs(argc, argv, &opts))
+    cli_args_t opts;
+    if (parse_args(argc, argv, &opts))
     {
         return EXIT_FAILURE;
     }
 
-    if (opts.encryptMode == 1)
+    if (opts.encrypt_mode == 1)
     {
-        if (opts.generateKey)
+        if (opts.generate_key)
         {
-            generateKey(opts.key, KEY_LENGTH);
+            generate_key(opts.key, KEY_LENGTH);
         }
 
         printf("Encrypting file...\n");
-        if (encryptFile(opts.inputPath, opts.outputPath, opts.key) == EXIT_SUCCESS)
+        if (encrypt_file(opts.input_path, opts.output_path, opts.key) == EXIT_SUCCESS)
         {
             printf("The file was successfully encrypted. Your key:\n%s\n", opts.key);
         }
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     else
     {
         printf("Decrypting file...\n");
-        if (decryptFile(opts.inputPath, opts.outputPath, opts.key) == EXIT_SUCCESS)
+        if (decrypt_file(opts.input_path, opts.output_path, opts.key) == EXIT_SUCCESS)
         {
             printf("The file was successfully decrypted.\n");
         }

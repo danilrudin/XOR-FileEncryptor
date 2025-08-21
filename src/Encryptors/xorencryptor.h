@@ -3,9 +3,9 @@
 
 #include <stddef.h>
 
-void generateKey(char *buffer, size_t size);
+void generate_key(char *buffer, size_t size);
 
-int encryptFile(const char *srcFilePath, const char *destFilePath, const char *key);
-int decryptFile(const char *srcFilePath, const char *destFilePath, const char *key);
+int encrypt_file(const char *src_file_path, const char *dest_file_path, const char *key);
+int decrypt_file(const char *src_file_path, const char *dest_file_path, const char *key);
 
 #endif // XORENCRYPTOR_H

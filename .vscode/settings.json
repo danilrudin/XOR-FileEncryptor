@@ -1,15 +1,16 @@
 {
-    "cmake.generator": "MinGW Makefiles",
-    "cmake.environment": {
-        "PATH": "${env:PATH}"
-    },
-    "files.associations": {
-        "xorencryptor.h": "c",
-        "constants.h": "c",
-        "args.h": "c",
-        "argHandlers": "c",
-        "stddef.h": "c",
-        "limits.h": "c",
-        "stdbool.h": "c"
-    }
+  "cmake.generator": "MinGW Makefiles",
+  "cmake.environment": {
+    "PATH": "${env:PATH}"
+  },
+  "files.associations": {
+    "xorencryptor.h": "c",
+    "constants.h": "c",
+    "args.h": "c",
+    "argHandlers": "c",
+    "stddef.h": "c",
+    "limits.h": "c",
+    "stdbool.h": "c",
+    "string.h": "c"
+  }
 }

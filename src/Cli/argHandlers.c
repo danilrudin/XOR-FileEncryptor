@@ -4,43 +4,43 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int handleFlag(int argc, char *argv[], int *i, int *target, int expectedValue, int disallowedValue);
-static int handleString(int argc, char *argv[], int *i, char *target, size_t maxLength);
-static int parseString(int argc, char *argv[], int *i, const char **target);
-static int isKnownFlag(const char *arg);
+static int handle_flag(int argc, char *argv[], int *i, int *target, int expectedValue, int disallowedValue);
+static int handle_string(int argc, char *argv[], int *i, char *target, size_t maxLength);
+static int parse_string(int argc, char *argv[], int *i, const char **target);
+static int is_known_flag(const char *arg);
 
 
-int handleEncrypt(int argc, char *argv[], int *i, CliArgs *opts)
+int handle_encrypt(int argc, char *argv[], int *i, cli_args_t *opts)
 {
-    return handleFlag(argc, argv, i, &opts->encryptMode, 1, -1);
+    return handle_flag(argc, argv, i, &opts->encrypt_mode, 1, -1);
 }
 
-int handleDecrypt(int argc, char *argv[], int *i, CliArgs *opts)
+int handle_decrypt(int argc, char *argv[], int *i, cli_args_t *opts)
 {
-    return handleFlag(argc, argv, i, &opts->encryptMode, 0, -1);
+    return handle_flag(argc, argv, i, &opts->encrypt_mode, 0, -1);
 }
 
-int handleGenerateKey(int argc, char *argv[], int *i, CliArgs *opts)
+int handle_generate_key(int argc, char *argv[], int *i, cli_args_t *opts)
 {
-    return handleFlag(argc, argv, i, &opts->generateKey, 1, 0);
+    return handle_flag(argc, argv, i, &opts->generate_key, 1, 0);
 }
 
-int handleKey(int argc, char *argv[], int *i, CliArgs *opts)
+int handle_key(int argc, char *argv[], int *i, cli_args_t *opts)
 {
-    return handleString(argc, argv, i, opts->key, KEY_LENGTH);
+    return handle_string(argc, argv, i, opts->key, KEY_LENGTH);
 }
 
-int handleInput(int argc, char *argv[], int *i, CliArgs *opts)
+int handle_input(int argc, char *argv[], int *i, cli_args_t *opts)
 {
-    return handleString(argc, argv, i, opts->inputPath, PATH_LENGTH);
+    return handle_string(argc, argv, i, opts->input_path, PATH_LENGTH);
 }
 
-int handleOutput(int argc, char *argv[], int *i, CliArgs *opts)
+int handle_output(int argc, char *argv[], int *i, cli_args_t *opts)
 {
-    return handleString(argc, argv, i, opts->outputPath, PATH_LENGTH);
+    return handle_string(argc, argv, i, opts->output_path, PATH_LENGTH);
 }
 
-static int handleFlag(int argc, char *argv[], int *i, int *target, int expectedValue, int disallowedValue)
+static int handle_flag(int argc, char *argv[], int *i, int *target, int expectedValue, int disallowedValue)
 {
     (void)argc;
     
@@ -56,7 +56,7 @@ static int handleFlag(int argc, char *argv[], int *i, int *target, int expectedV
     return 0;
 }
 
-static int handleString(int argc, char *argv[], int *i, char *target, size_t maxLength)
+static int handle_string(int argc, char *argv[], int *i, char *target, size_t maxLength)
 {
     const char *flagName = argv[*i];
 
@@ -67,7 +67,7 @@ static int handleString(int argc, char *argv[], int *i, char *target, size_t max
     }
 
     const char *arg;
-    if (parseString(argc, argv, i, &arg) != 0 || isKnownFlag(arg))
+    if (parse_string(argc, argv, i, &arg) != 0 || is_known_flag(arg))
     {
         fprintf(stderr, "Error: %s requires a value.\n", flagName);
         return -1;
@@ -85,7 +85,7 @@ static int handleString(int argc, char *argv[], int *i, char *target, size_t max
     return 0;
 }
 
-static int parseString(int argc, char *argv[], int *i, const char **arg)
+static int parse_string(int argc, char *argv[], int *i, const char **arg)
 {
     if (++(*i) >= argc || argv[*i][0] == '\0')
     {
@@ -106,7 +106,7 @@ static const char *knownFlags[] = {
     NULL
 };
 
-static int isKnownFlag(const char *arg)
+static int is_known_flag(const char *arg)
 {
     for (int i = 0; knownFlags[i] != NULL; ++i)
     {
