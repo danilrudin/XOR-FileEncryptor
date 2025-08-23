@@ -4,23 +4,25 @@
 #include <string.h>
 #include <time.h>
 
-static int is_safe_char(char ch);
-
 void generate_key(char *buffer, size_t size)
 {
-    srand((unsigned int) time(NULL));
-    
-    size_t i = 0;
-    while (i < size - 1)
-    {
-        char candidate = (char)((rand() % (126 - 33 + 1)) + 33);
-        if (is_safe_char(candidate))
-        {
-            buffer[i++] = candidate;
-        }
-    }
+	static const char allowed_chars[] =
+		"0123456789"
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		"abcdefghijklmnopqrstuvwxyz"
+		"!@#$%^&*()-_=+[]{};:,.<>/?|`~";
 
-    buffer[size - 1] = '\0';
+	const size_t allowed_count = sizeof(allowed_chars) - 1;
+
+	srand((unsigned int) time(NULL));
+
+	for (size_t i = 0; i < size - 1; ++i)
+	{
+		int index = rand() % allowed_count;
+		buffer[i] = allowed_chars[index];
+	}
+
+	buffer[size - 1] = '\0';
 }
 
 int encrypt_file(const char *src_file_path, const char *dest_file_path, const char *key)
@@ -61,9 +63,4 @@ int encrypt_file(const char *src_file_path, const char *dest_file_path, const ch
 int decrypt_file(const char *src_file_path, const char *dest_file_path, const char *key)
 {
     return encrypt_file(src_file_path, dest_file_path, key);
-}
-
-static int is_safe_char(char ch)
-{
-    return (ch >= 33 && ch <= 126) && ch != '\\' && ch != '"' && ch != '\'';
 }
