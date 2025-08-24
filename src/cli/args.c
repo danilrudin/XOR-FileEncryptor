@@ -9,6 +9,8 @@
 static int validate_args(const cli_args_t *opts);
 static void print_usage(const char *program_name);
 
+// Table-driven mapping of CLI flags to their handler functions.
+// This allows parsing logic to remain generic and extensible.
 typedef struct
 {
     const char *flag;
@@ -36,6 +38,10 @@ int parse_args(int argc, char *argv[], cli_args_t *opts)
     memset(opts, 0, sizeof(cli_args_t));
     opts->encrypt_mode = -1;
 
+
+    // Iterate over argv, attempting to match each argument to a known flag.
+    // If a flag matches, its handler is invoked, which may consume additional arguments.
+    // Unknown flags result in an error and early exit.
     for (int i = 1; i < argc; ++i)
     {
         int matched = 0;
@@ -46,6 +52,8 @@ int parse_args(int argc, char *argv[], cli_args_t *opts)
                 continue;
             }
 
+            // Argument index 'i' is passed by pointer so the handler can
+            // consume additional arguments (e.g., -k <key>) and advance 'i'.
             if (opt->handler(argc, argv, &i, opts))
             {
                 return EXIT_FAILURE;
