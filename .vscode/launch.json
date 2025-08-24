@@ -10,7 +10,7 @@
         "-e",
         "-g",
         "-i",
-        "${workspaceFolder}/build/bin/enc.exe",
+        "${workspaceFolder}/build/bin/xor-file-encryptor.exe",
         "-o",
         "${workspaceFolder}/build/bin/dec.exe"
       ],
